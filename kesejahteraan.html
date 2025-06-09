@@ -5,64 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Form Kesejahteraan</title>
   <style>
+    :root {
+      --primary: #c50000;
+      --secondary: #f5f5f5;
+      --text: #333;
+      --shadow: rgba(0,0,0,0.15);
+      --button-hover: #a00000;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-      background-color: #f9f9f9;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--secondary);
+      color: var(--text);
     }
-    form {
+
+    .container {
       max-width: 600px;
-      margin: auto;
+      margin: 30px auto;
+      padding: 25px;
       background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      box-shadow: 0 6px 15px var(--shadow);
     }
-    h2 {
+
+    .container h2 {
       text-align: center;
-      margin-bottom: 20px;
+      font-size: 20px;
+      color: var(--primary);
+      margin-bottom: 15px;
     }
+
     label {
       display: block;
-      margin-top: 15px;
       font-weight: bold;
+      margin-top: 15px;
     }
+
     input, select {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-top: 5px;
       border-radius: 8px;
-      border: 1px solid #ccc;
+      border: 1px solid #aaa;
       box-sizing: border-box;
+      font-size: 15px;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
     }
+
+    input:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 8px rgba(197, 0, 0, 0.3);
+    }
+
     button {
       margin-top: 25px;
       width: 100%;
-      padding: 12px;
-      background-color: #4CAF50;
+      padding: 14px;
+      background: var(--primary);
       color: white;
       font-size: 16px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s ease;
     }
+
     button:hover {
-      background-color: #45a049;
+      background: var(--button-hover);
     }
+
     .back-link {
       margin-top: 20px;
       display: block;
       text-align: center;
       text-decoration: none;
-      color: #555;
+      color: var(--text);
+      font-weight: bold;
+      transition: color 0.3s ease;
     }
+
+    .back-link:hover {
+      color: var(--primary);
+    }
+
   </style>
 </head>
 <body>
+
+<div class="container">
+  <h2>Form Kesejahteraan</h2>
   <form id="kesejahteraanForm">
-    <h2>Form Kesejahteraan</h2>
 
     <label>Tempat Tinggal Peserta Didik *</label>
     <select name="tempat_tinggal" required>
@@ -103,8 +137,8 @@
       <option value="Tidak">Tidak</option>
     </select>
     <div id="kip_input" style="display:none;">
-      <label>Nomor KIP</label>
-      <input type="text" name="no_kip" />
+      <label>Nomor KIP *</label>
+      <input type="text" name="no_kip" maxlength="16" required />
     </div>
 
     <label>Apakah Punya KKS? *</label>
@@ -114,8 +148,8 @@
       <option value="Tidak">Tidak</option>
     </select>
     <div id="kks_input" style="display:none;">
-      <label>Nomor KKS</label>
-      <input type="text" name="no_kks" />
+      <label>Nomor KKS *</label>
+      <input type="text" name="no_kks" maxlength="16" required />
     </div>
 
     <label>Nama Asal Sekolah Peserta Didik *</label>
@@ -127,22 +161,34 @@
     <button type="submit">Kirim</button>
     <a href="index.html" class="back-link">← Kembali ke Beranda</a>
   </form>
+</div>
 
-  <script>
-    function toggleKip() {
-      const kip = document.getElementById('punya_kip').value;
-      document.getElementById('kip_input').style.display = kip === 'Ya' ? 'block' : 'none';
-    }
-    function toggleKks() {
-      const kks = document.getElementById('punya_kks').value;
-      document.getElementById('kks_input').style.display = kks === 'Ya' ? 'block' : 'none';
-    }
+<script>
+  function toggleKip() {
+    document.getElementById('kip_input').style.display = document.getElementById('punya_kip').value === 'Ya' ? 'block' : 'none';
+  }
+  
+  function toggleKks() {
+    document.getElementById('kks_input').style.display = document.getElementById('punya_kks').value === 'Ya' ? 'block' : 'none';
+  }
 
-    document.getElementById('kesejahteraanForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert("Data berhasil dikirim (simulasi).");
-      // Nanti fetch() ditambahkan di sini ke Google Apps Script
-    });
-  </script>
+  document.getElementById('kesejahteraanForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+    let jsonData = {};
+    formData.forEach((value, key) => jsonData[key] = value);
+
+    fetch("https://script.google.com/macros/s/AKfycbxnG5ICZrC4O34QPaEf7nUacW361T1I_DbeIQA-MeaEthv70PNxrRxPHFynHNtrzSMc/exec", {
+      method: "POST",
+      body: JSON.stringify(jsonData),
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(response => response.text())
+    .then(data => alert("Data berhasil dikirim!"))
+    .catch(error => console.error("Error:", error));
+  });
+</script>
+
 </body>
 </html>
