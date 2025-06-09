@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PPDB Online - SMK</title>
+  <style>
+    :root {
+      --primary: #d91c1c;
+      --secondary: #f2f2f2;
+      --text: #222;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--secondary);
+      color: var(--text);
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background: var(--primary);
+      color: #fff;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+
+    .container h2 {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    ul.menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul.menu li {
+      margin: 10px 0;
+    }
+
+    ul.menu li a {
+      display: block;
+      text-decoration: none;
+      background: #e8e8e8;
+      color: var(--text);
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    ul.menu li a:hover {
+      background: #ccc;
+    }
+
+    .edit-form {
+      margin-top: 25px;
+    }
+
+    .edit-form label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .edit-form input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .edit-form button {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .edit-form button:hover {
+      background: #a70f0f;
+    }
+
+    .info {
+      font-size: 13px;
+      color: #555;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 20px;
+      }
+
+      .container {
+        margin: 10px;
+        padding: 15px;
+      }
+
+      .edit-form button {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>PPDB Online - SMK Negeri</h1>
+  <p>Formulir Pendaftaran Peserta Didik Baru</p>
+</header>
+
+<div class="container">
+  <h2>Menu Formulir</h2>
+  <ul class="menu">
+    <li><a href="identitas.html">1. Identitas Siswa</a></li>
+    <li><a href="kesejahteraan.html">2. Kesejahteraan</a></li>
+    <li><a href="data_ayah.html">3. Data Ayah</a></li>
+    <li><a href="data_ibu.html">4. Data Ibu</a></li>
+    <li><a href="data_wali.html">5. Data Wali</a></li>
+    <li><a href="kontak.html">6. Kontak</a></li>
+    <li><a href="periodik.html">7. Data Periodik</a></li>
+    <li><a href="konfirmasi.html">8. Konfirmasi & Unduh Bukti</a></li>
+  </ul>
+
+  <div class="edit-form">
+    <h2>Cek/Edit Data Lama</h2>
+    <form id="editForm">
+      <label for="nik">Masukkan NIK Siswa:</label>
+      <input type="text" name="nik" id="nik" maxlength="16" placeholder="Contoh: 1234567890123456" required />
+      <button type="submit">Cari Data</button>
+    </form>
+  </div>
+
+  <div class="info">
+    Gunakan NIK siswa yang pernah didaftarkan untuk melihat atau memperbarui data sebelumnya.
+  </div>
+</div>
+
+<script>
+  document.getElementById('editForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nik = document.getElementById('nik').value.trim();
+    if (nik.length < 10) {
+      alert('NIK minimal 10 digit.');
+    } else {
+      alert('Simulasi: Arahkan ke halaman edit data untuk NIK: ' + nik);
+      // window.location.href = `edit.html?nik=${encodeURIComponent(nik)}`;
+    }
+  });
+</script>
+
+</body>
+</html>

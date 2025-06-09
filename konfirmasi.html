@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Konfirmasi & Unduh Bukti Pendaftaran</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f7;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .checkbox-group {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .checkbox-group input {
+      margin-right: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .info {
+      background: #e6f7ff;
+      padding: 12px;
+      border-left: 4px solid #1890ff;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 0.95em;
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #555;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Konfirmasi & Unduh Bukti</h2>
+
+    <label for="nik">Masukkan NIK Siswa Anda:</label>
+    <input type="text" id="nik" placeholder="Contoh: 1234567890123456" maxlength="16" oninput="checkForm()" />
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="konfirmasi" onchange="checkForm()" />
+      <label for="konfirmasi">Saya menyatakan bahwa data yang saya isikan sudah benar.</label>
+    </div>
+
+    <button id="downloadBtn" disabled onclick="downloadPDF()">Unduh Bukti Pendaftaran</button>
+
+    <div class="info">
+      📄 Bukti pendaftaran akan didownload dalam bentuk PDF berdasarkan NIK siswa Anda.  
+      Pastikan NIK dimasukkan dengan benar agar data dapat ditemukan.
+    </div>
+
+    <a href="index.html" class="back-link">← Kembali ke Beranda</a>
+  </div>
+
+  <script>
+    function checkForm() {
+      const nik = document.getElementById('nik').value.trim();
+      const konfirmasi = document.getElementById('konfirmasi').checked;
+      const btn = document.getElementById('downloadBtn');
+      btn.disabled = !(nik.length >= 10 && konfirmasi);
+    }
+
+    function downloadPDF() {
+      const nik = document.getElementById('nik').value.trim();
+      const link = `https://script.google.com/macros/s/AKfycbxnG5ICZrC4O34QPaEf7nUacW361T1I_DbeIQA-MeaEthv70PNxrRxPHFynHNtrzSMc/exec{nik}`;
+      window.open(link, '_blank');
+    }
+  </script>
+</body>
+</html>

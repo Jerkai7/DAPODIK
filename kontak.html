@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kontak</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      padding: 20px;
+      scroll-behavior: smooth;
+    }
+    form {
+      background: #fff;
+      max-width: 600px;
+      margin: auto;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .phone-field {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+    .phone-field span {
+      background: #eee;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px 0 0 8px;
+    }
+    .phone-field input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-left: none;
+      border-radius: 0 8px 8px 0;
+    }
+    .switch-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+      align-items: center;
+    }
+    .switch-group label {
+      margin: 0;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 25px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0;
+      right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 25px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 2.5px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<form id="formKontak">
+  <h2>Kontak yang Bisa Dihubungi</h2>
+
+  <div class="switch-group">
+    <label>Apakah Anda tinggal dengan Orang Tua</label>
+    <label class="switch">
+      <input type="checkbox" id="toggleOrtu" onchange="handleToggle()">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="switch-group">
+    <label>Apakah Anda tinggal dengan Wali Murid</label>
+    <label class="switch">
+      <input type="checkbox" id="toggleWali" onchange="handleToggle()">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Nomor HP Peserta -->
+  <label>No. WA/HP Peserta Didik *</label>
+  <div class="phone-field">
+    <span>+62</span>
+    <input type="text" name="hp_peserta" required pattern="\\d{10,13}" maxlength="13" placeholder="contoh: 81234567890">
+  </div>
+
+  <!-- Nomor HP Orang Tua -->
+  <div id="kontakOrtu" class="hidden">
+    <label>No. WA/HP Orang Tua *</label>
+    <div class="phone-field">
+      <span>+62</span>
+      <input type="text" name="hp_ortu" pattern="\\d{10,13}" maxlength="13" placeholder="contoh: 81234567890">
+    </div>
+  </div>
+
+  <!-- Nomor HP Wali -->
+  <div id="kontakWali" class="hidden">
+    <label>No. WA/HP Wali *</label>
+    <div class="phone-field">
+      <span>+62</span>
+      <input type="text" name="hp_wali" pattern="\\d{10,13}" maxlength="13" placeholder="contoh: 81234567890">
+    </div>
+  </div>
+
+  <!-- Tombol -->
+  <a href="index.html" style="display: block; margin-top: 30px;">
+    <button type="button" style="background-color: #6c757d;">Kembali ke Beranda</button>
+  </a>
+  <button type="submit">Kirim</button>
+</form>
+
+<script>
+  function handleToggle() {
+    const ortu = document.getElementById('toggleOrtu').checked;
+    const wali = document.getElementById('toggleWali').checked;
+
+    document.getElementById('kontakOrtu').classList.add('hidden');
+    document.getElementById('kontakWali').classList.add('hidden');
+
+    if (ortu) {
+      document.getElementById('kontakOrtu').classList.remove('hidden');
+      document.getElementById('toggleWali').checked = false;
+    } else if (wali) {
+      document.getElementById('kontakWali').classList.remove('hidden');
+      document.getElementById('toggleOrtu').checked = false;
+    }
+  }
+
+  document.getElementById('formKontak').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Data kontak berhasil dikirim (simulasi)');
+  });
+</script>
+
+</body>
+</html>

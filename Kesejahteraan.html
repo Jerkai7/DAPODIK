@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form Kesejahteraan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      background-color: #f9f9f9;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .back-link {
+      margin-top: 20px;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <form id="kesejahteraanForm">
+    <h2>Form Kesejahteraan</h2>
+
+    <label>Tempat Tinggal Peserta Didik *</label>
+    <select name="tempat_tinggal" required>
+      <option value="">-- Pilih --</option>
+      <option>Bersama Orang Tua</option>
+      <option>Wali</option>
+      <option>Kost</option>
+    </select>
+
+    <label>Moda Transportasi *</label>
+    <select name="transportasi" required>
+      <option value="">-- Pilih --</option>
+      <option>Jalan Kaki</option>
+      <option>Angkutan Umum</option>
+      <option>Ojek</option>
+      <option>Sepeda</option>
+      <option>Sepeda Motor</option>
+    </select>
+
+    <label>Anak Ke Berapa Berdasarkan KK *</label>
+    <input type="number" name="anak_ke" required />
+
+    <label>Jumlah Saudara Kandung *</label>
+    <input type="number" name="jumlah_saudara" required />
+
+    <label>Status Dalam Keluarga *</label>
+    <select name="status_keluarga" required>
+      <option value="">-- Pilih --</option>
+      <option>Anak Kandung</option>
+      <option>Anak Tiri</option>
+      <option>Anak Angkat</option>
+    </select>
+
+    <label>Apakah Memiliki KIP? *</label>
+    <select name="punya_kip" id="punya_kip" required onchange="toggleKip()">
+      <option value="">-- Pilih --</option>
+      <option value="Ya">Ya</option>
+      <option value="Tidak">Tidak</option>
+    </select>
+    <div id="kip_input" style="display:none;">
+      <label>Nomor KIP</label>
+      <input type="text" name="no_kip" />
+    </div>
+
+    <label>Apakah Punya KKS? *</label>
+    <select name="punya_kks" id="punya_kks" required onchange="toggleKks()">
+      <option value="">-- Pilih --</option>
+      <option value="Ya">Ya</option>
+      <option value="Tidak">Tidak</option>
+    </select>
+    <div id="kks_input" style="display:none;">
+      <label>Nomor KKS</label>
+      <input type="text" name="no_kks" />
+    </div>
+
+    <label>Nama Asal Sekolah Peserta Didik *</label>
+    <input type="text" name="asal_sekolah" placeholder="Contoh: SMP Negeri 12 Lebong" required />
+
+    <label>Nama Kec. Asal Sekolah Peserta Didik *</label>
+    <input type="text" name="kecamatan_sekolah" placeholder="Contoh: Uram Jaya" required />
+
+    <button type="submit">Kirim</button>
+    <a href="index.html" class="back-link">← Kembali ke Beranda</a>
+  </form>
+
+  <script>
+    function toggleKip() {
+      const kip = document.getElementById('punya_kip').value;
+      document.getElementById('kip_input').style.display = kip === 'Ya' ? 'block' : 'none';
+    }
+    function toggleKks() {
+      const kks = document.getElementById('punya_kks').value;
+      document.getElementById('kks_input').style.display = kks === 'Ya' ? 'block' : 'none';
+    }
+
+    document.getElementById('kesejahteraanForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Data berhasil dikirim (simulasi).");
+      // Nanti fetch() ditambahkan di sini ke Google Apps Script
+    });
+  </script>
+</body>
+</html>

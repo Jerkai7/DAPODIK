@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Ayah Kandung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      scroll-behavior: smooth;
+      background-color: #f5f5f5;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .back-link {
+      margin-top: 20px;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <form id="ayahForm">
+    <h2>Data Ayah Kandung</h2>
+
+    <label>Nama Ayah *</label>
+    <input type="text" name="nama_ayah" required />
+
+    <label>NIK Ayah (16 digit angka)</label>
+    <input type="text" name="nik_ayah" maxlength="16" pattern="[0-9]{16}" />
+
+    <label>Tahun Lahir Ayah *</label>
+    <input type="text" name="tahun_lahir_ayah" pattern="\d{4}" maxlength="4" required placeholder="Contoh: 1975" />
+
+    <label>Pendidikan Ayah *</label>
+    <select name="pendidikan_ayah" required>
+      <option value="">-- Pilih --</option>
+      <option>SD</option>
+      <option>SMP Sederajat</option>
+      <option>SMA Sederajat</option>
+      <option>D3</option>
+      <option>S1</option>
+      <option>Lainnya</option>
+    </select>
+
+    <label>Pekerjaan Ayah *</label>
+    <select name="pekerjaan_ayah" id="pekerjaan_ayah" required onchange="togglePenghasilan()">
+      <option value="">-- Pilih --</option>
+      <option>Petani</option>
+      <option>Pekebun</option>
+      <option>Wiraswasta</option>
+      <option>PNS</option>
+      <option>Lainnya</option>
+      <option>Tidak Bekerja</option>
+      <option>Sudah meninggal</option>
+    </select>
+
+    <label>Penghasilan Ayah *</label>
+    <select name="penghasilan_ayah" id="penghasilan_ayah" required>
+      <option value="">-- Pilih --</option>
+      <option>Kurang Dari Rp. 500.000</option>
+      <option>Rp. 500.000 - 999.999</option>
+      <option>Rp. 1.000.000 - 1.999.999</option>
+      <option>Rp. 2.000.000 - 3.999.999</option>
+      <option>Rp. 4.000.000 - 5.999.999</option>
+      <option>Lebih dari Rp 6.000.000</option>
+      <option>Tidak Berpenghasilan</option>
+    </select>
+
+    <button type="submit">Kirim</button>
+    <a href="index.html" class="back-link">← Kembali ke Beranda</a>
+  </form>
+
+  <script>
+    function togglePenghasilan() {
+      const pekerjaan = document.getElementById('pekerjaan_ayah').value;
+      const penghasilan = document.getElementById('penghasilan_ayah');
+      const disabled = pekerjaan === 'Tidak Bekerja' || pekerjaan === 'Sudah meninggal';
+      penghasilan.disabled = disabled;
+      if (disabled) penghasilan.value = '';
+    }
+
+    document.getElementById('ayahForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Data ayah berhasil dikirim (simulasi).");
+    });
+  </script>
+</body>
+</html>

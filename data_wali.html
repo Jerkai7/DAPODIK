@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Wali</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      scroll-behavior: smooth;
+      background-color: #f5f5f5;
+      overflow-x: hidden;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .back-link {
+      margin-top: 20px;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: #555;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <form id="waliForm">
+    <h2>Data Wali</h2>
+
+    <label>Apakah Anda tinggal dengan wali? *</label>
+    <select name="tinggal_dengan_wali" id="tinggal_dengan_wali" required onchange="toggleFormWali()">
+      <option value="">-- Pilih --</option>
+      <option value="ya">Ya</option>
+      <option value="tidak">Tidak</option>
+    </select>
+
+    <div id="formWali" class="hidden">
+      <label>Nama Wali *</label>
+      <input type="text" name="nama_wali" />
+
+      <label>NIK Wali (16 digit angka)</label>
+      <input type="text" name="nik_wali" maxlength="16" pattern="[0-9]{16}" placeholder="16 digit angka" />
+
+      <label>Tahun Lahir Wali *</label>
+      <input type="text" name="tahun_lahir_wali" pattern="\\d{4}" maxlength="4" placeholder="Contoh: 1975" />
+
+      <label>Pendidikan Wali *</label>
+      <select name="pendidikan_wali">
+        <option value="">-- Pilih --</option>
+        <option>SD</option>
+        <option>SMP Sederajat</option>
+        <option>SMA Sederajat</option>
+        <option>D3</option>
+        <option>S1</option>
+        <option>Lainnya</option>
+      </select>
+
+      <label>Pekerjaan Wali *</label>
+      <select name="pekerjaan_wali" id="pekerjaan_wali" onchange="togglePenghasilan()">
+        <option value="">-- Pilih --</option>
+        <option>Petani</option>
+        <option>Pekebun</option>
+        <option>Wiraswasta</option>
+        <option>PNS</option>
+        <option>Lainnya</option>
+        <option>Tidak Bekerja</option>
+        <option>Sudah meninggal</option>
+      </select>
+
+      <label>Penghasilan Wali *</label>
+      <select name="penghasilan_wali" id="penghasilan_wali">
+        <option value="">-- Pilih --</option>
+        <option>Kurang Dari Rp. 500.000</option>
+        <option>Rp. 500.000 - 999.999</option>
+        <option>Rp. 1.000.000 - 1.999.999</option>
+        <option>Rp. 2.000.000 - 3.999.999</option>
+        <option>Rp. 4.000.000 - 5.999.999</option>
+        <option>Lebih dari Rp 6.000.000</option>
+        <option>Tidak Berpenghasilan</option>
+      </select>
+    </div>
+
+    <button type="submit">Kirim</button>
+    <a href="index.html" class="back-link">← Kembali ke Beranda</a>
+  </form>
+
+  <script>
+    function toggleFormWali() {
+      const pilihan = document.getElementById('tinggal_dengan_wali').value;
+      const formWali = document.getElementById('formWali');
+      if (pilihan === 'ya') {
+        formWali.classList.remove('hidden');
+        // Tandai input di dalam sebagai required
+        [...formWali.querySelectorAll("input, select")].forEach(el => el.required = true);
+      } else {
+        formWali.classList.add('hidden');
+        // Hapus isian dan required
+        [...formWali.querySelectorAll("input, select")].forEach(el => {
+          el.required = false;
+          el.value = "";
+        });
+      }
+    }
+
+    function togglePenghasilan() {
+      const pekerjaan = document.getElementById('pekerjaan_wali').value;
+      const penghasilan = document.getElementById('penghasilan_wali');
+      const disabled = pekerjaan === 'Tidak Bekerja' || pekerjaan === 'Sudah meninggal';
+      penghasilan.disabled = disabled;
+      if (disabled) penghasilan.value = '';
+    }
+
+    document.getElementById('waliForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Data wali berhasil dikirim (simulasi).");
+    });
+  </script>
+</body>
+</html>

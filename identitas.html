@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form Identitas Siswa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      background-color: #f9f9f9;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .back-link {
+      margin-top: 20px;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <form id="identitasForm">
+    <h2>Form Identitas Siswa</h2>
+
+    <label for="jurusan">Pilihan Jurusan *</label>
+    <select id="jurusan" name="jurusan" required>
+      <option value="">-- Pilih Jurusan --</option>
+      <option>Tata Busana</option>
+      <option>Teknik Instalasi Tenaga Listrik</option>
+      <option>Teknik dan Bisnis Sepeda Motor</option>
+      <option>Teknik Kendaraan Ringan Otomotif</option>
+      <option>Desain Komunikasi Visual</option>
+    </select>
+
+    <label>Nama Lengkap *</label>
+    <input type="text" name="nama" required />
+
+    <label>Jenis Kelamin *</label>
+    <select name="jk" required>
+      <option value="">-- Pilih Jenis Kelamin --</option>
+      <option>Laki-Laki</option>
+      <option>Perempuan</option>
+    </select>
+
+    <label>NISN (10 digit)*</label>
+    <input type="number" name="nisn" maxlength="10" required />
+
+    <label>NIK (16 digit)*</label>
+    <input type="number" name="nik" maxlength="16" required />
+
+    <label>No. KK (16 digit)*</label>
+    <input type="number" name="nokk" maxlength="16" required />
+
+    <label>Tempat Lahir *</label>
+    <input type="text" name="tempat_lahir" required />
+
+    <label>Tanggal Lahir *</label>
+    <input type="date" name="tanggal_lahir" required />
+
+    <label>No. Registrasi Akte Kelahiran</label>
+    <input type="text" name="no_akte" />
+
+    <label>Agama *</label>
+    <select name="agama" required>
+      <option value="">-- Pilih Agama --</option>
+      <option>Islam</option>
+      <option>Kristen</option>
+      <option>Katholik</option>
+      <option>Hindu</option>
+      <option>Budha</option>
+    </select>
+
+    <label>Alamat Jalan *</label>
+    <input type="text" name="alamat_jalan" required />
+
+    <label>RT</label>
+    <input type="text" name="rt" />
+
+    <label>RW</label>
+    <input type="text" name="rw" />
+
+    <label>Nama Dusun / Desa *</label>
+    <input type="text" name="desa" required />
+
+    <button type="submit">Kirim</button>
+    <a href="index.html" class="back-link">← Kembali ke Beranda</a>
+  </form>
+
+  <script>
+    document.getElementById('identitasForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Data berhasil dikirim (simulasi).");
+      // Nanti di sini akan ditambahkan fetch() ke Google Apps Script
+    });
+  </script>
+</body>
+</html>
