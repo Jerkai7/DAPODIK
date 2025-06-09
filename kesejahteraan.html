@@ -137,8 +137,8 @@
       <option value="Tidak">Tidak</option>
     </select>
     <div id="kip_input" style="display:none;">
-      <label>Nomor KIP *</label>
-      <input type="text" name="no_kip" maxlength="16" required />
+      <label>Nomor KIP</label>
+      <input type="text" name="no_kip" id="no_kip" maxlength="16" />
     </div>
 
     <label>Apakah Punya KKS? *</label>
@@ -148,8 +148,8 @@
       <option value="Tidak">Tidak</option>
     </select>
     <div id="kks_input" style="display:none;">
-      <label>Nomor KKS *</label>
-      <input type="text" name="no_kks" maxlength="16" required />
+      <label>Nomor KKS</label>
+      <input type="text" name="no_kks" id="no_kks" maxlength="16" />
     </div>
 
     <label>Nama Asal Sekolah Peserta Didik *</label>
@@ -165,11 +165,13 @@
 
 <script>
   function toggleKip() {
-    document.getElementById('kip_input').style.display = document.getElementById('punya_kip').value === 'Ya' ? 'block' : 'none';
+    const kipInput = document.getElementById('no_kip');
+    kipInput.style.display = document.getElementById('punya_kip').value === 'Ya' ? 'block' : 'none';
   }
   
   function toggleKks() {
-    document.getElementById('kks_input').style.display = document.getElementById('punya_kks').value === 'Ya' ? 'block' : 'none';
+    const kksInput = document.getElementById('no_kks');
+    kksInput.style.display = document.getElementById('punya_kks').value === 'Ya' ? 'block' : 'none';
   }
 
   document.getElementById('kesejahteraanForm').addEventListener('submit', function(e) {
@@ -184,9 +186,12 @@
       body: JSON.stringify(jsonData),
       headers: { "Content-Type": "application/json" }
     })
-    .then(response => response.text())
+    .then(response => {
+        if (!response.ok) throw new Error("Server tidak merespons dengan benar.");
+        return response.text();
+    })
     .then(data => alert("Data berhasil dikirim!"))
-    .catch(error => console.error("Error:", error));
+    .catch(error => console.error("Terjadi error:", error));
   });
 </script>
 
